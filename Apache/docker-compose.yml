@@ -1,0 +1,55 @@
+
+version: '3.7'
+services:
+  apache:
+    image: jagdriver/wavesnake:apache-v1.0.0
+
+    volumes:
+      - /opt/containers/busybox/data:/var/www/html
+
+    networks:
+      - traefik-public
+
+      #ports:
+      #  - "80:80"
+
+    labels:
+      - "traefik.enable=true"
+
+      # This section id for local http access
+      - "traefik.http.routers.apache-local.entrypoints=web"
+      - "traefik.http.routers.apache-local.rule=Host(`sketch.wavesnake.local`)"
+      - "traefik.http.routers.apache-local.service=apache-local"
+      - "traefik.http.services.apache-local.loadbalancer.server.port=80"
+
+      # This section is for external http access
+      - "traefik.http.routers.apache-external.entrypoints=web"
+      - "traefik.http.routers.apache-external.rule=Host(`sketch.wavesnake.dk`)"
+      - "traefik.http.routers.apache-external.service=apache-external"
+      - "traefik.http.services.apache-external.loadbalancer.server.port=80"
+      - "traefik.http.middlewares.apache-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.apache-external.middlewares=apache-https-redirect"
+
+      # This section is for external https access
+      - "traefik.http.routers.apache-secure.entrypoints=secure"
+      - "traefik.http.routers.apache-secure.rule=Host(`sketch.wavesnake.dk`)"
+      - "traefik.http.routers.apache-secure.tls=true"
+      - "traefik.http.routers.apache-secure.tls.certresolver=http"
+      - "traefik.http.routers.apache-secure.service=apache-secure"
+      - "traefik.http.services.apache-secure.loadbalancer.server.port=80"
+
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints:
+          - node.role == manager
+
+networks:
+  traefik-public:
+    external: true
+
+
