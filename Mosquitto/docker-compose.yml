@@ -1,0 +1,49 @@
+version: '3.7' 
+
+# Mosquitto on Traefik 2
+# As of this moment we are not usimg TLS
+# But thw routing is thru Traefik
+
+services:
+  mosquitto:
+    image: jagdriver/wavesnake:mosquitto-v1.0.6
+
+
+    ports:
+      - target: 1883
+        #published: 1883
+        protocol: tcp
+        mode: host
+
+    networks:
+      - traefik-public
+
+    volumes:
+        - "/opt/containers/mosquitto/data:/mosquitto/data"
+        - "/var/log/mosquitto:/mosquitto/log"
+        - "/opt/containers/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf"
+        - "/opt/containers/mosquitto/config/conf.d/acl:/mosquitto/config/conf.d/acl"
+        - "/opt/containers/mosquitto/config/conf.d/pw:/mosquitto/config/conf.d/pw"
+
+    labels:
+        - "traefik.enable=true"
+        - "traefik.tcp.routers.mosquitto.entrypoints=mosquitto"
+        - "traefik.tcp.routers.mosquitto.rule=HostSNI(`*`)"
+        - "traefik.tcp.routers.mosquitto.service=mqt"
+        #- "traefik.tcp.routers.mosquitto.tls=true"
+        #- "traefik.tcp.routers.mosquitto.tls.certresolver=http"
+        #- "traefik.tcp.routers.mosquitto.tls.domains[0].main=mqt.wavesnake.dk"
+        - "traefik.tcp.services.mqt.loadBalancer.server.port=1883"
+
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints:
+          - node.role == manager
+networks:
+   traefik-public:
+     external: true
