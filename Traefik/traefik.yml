@@ -1,0 +1,36 @@
+api:
+  dashboard: true
+
+log:
+  filePath: "log/traefik.log"
+  level: DEBUG
+
+accessLog:
+  filePath: "log/access.log"
+
+entryPoints:
+  web:
+    address: ":80"
+  secure:
+    address: ":443"
+  mosquitto:
+    address: ":8210"
+  mariadb:
+    address: ":8211"
+  mqtinternal:
+    address: ":8213"
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+
+certificatesResolvers:
+  http:
+    acme:
+      email: jagdriver@hotmail.com
+      storage: acme.json
+      #caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
+      httpChallenge:
+         entryPoint: web
+      #tlsChallenge: true

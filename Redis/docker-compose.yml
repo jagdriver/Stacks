@@ -1,0 +1,39 @@
+version: '3.7'
+services:
+  redis:
+    image: jagdriver/wavesnake:redis-v1.0.5
+
+    volumes:
+      - /var/log/snakelogs:/var/snakelogs rw
+      - /opt/containers/redis/data:/etc/redis
+
+    ports:
+      - target: 6379
+        protocol: tcp
+        mode: host
+
+    networks:
+      - traefik-public
+
+    labels:
+      - "traefik.enable=true"
+
+      # This section id for local http access
+      - "traefik.tcp.routers.redisint.entrypoints=redis"
+      - "traefik.tcp.routers.redisint.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.redisint.service=redisinternal"
+      - "traefik.tcp.services.redisinternal.loadBalancer.server.port=6379"
+
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints:
+          - node.role == manager
+
+networks:
+  traefik-public:
+    external: true

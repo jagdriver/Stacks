@@ -1,9 +1,8 @@
-
 version: '3.7'
 services:
   apache:
     image: jagdriver/wavesnake:apache-v1.0.0
-
+    
     volumes:
       - /opt/containers/busybox/data:/var/www/html
 
@@ -15,7 +14,6 @@ services:
 
     labels:
       - "traefik.enable=true"
-
       # This section id for local http access
       - "traefik.http.routers.apache-local.entrypoints=web"
       - "traefik.http.routers.apache-local.rule=Host(`sketch.wavesnake.local`)"
@@ -51,5 +49,3 @@ services:
 networks:
   traefik-public:
     external: true
-
-

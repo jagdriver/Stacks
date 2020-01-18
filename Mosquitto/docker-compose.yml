@@ -1,17 +1,11 @@
-version: '3.7' 
-
-# Mosquitto on Traefik 2
-# As of this moment we are not usimg TLS
-# But thw routing is thru Traefik
+version: '3.7' # Mosquitto on Traefik 2
 
 services:
   mosquitto:
     image: jagdriver/wavesnake:mosquitto-v1.0.6
 
-
     ports:
       - target: 1883
-        #published: 1883
         protocol: tcp
         mode: host
 
@@ -27,6 +21,14 @@ services:
 
     labels:
         - "traefik.enable=true"
+
+        # This if for internal access to Mosquitto
+        - "traefik.tcp.routers.mqtint.entrypoints=mqtinternal"
+        - "traefik.tcp.routers.mqtint.rule=HostSNI(`*`)"
+        - "traefik.tcp.routers.mqtint.service=mqtinternal"
+        - "traefik.tcp.services.mqtinternal.loadBalancer.server.port=1883"
+        
+        # This is for external access to Mosquitto, using self signed certificat mqt.wavesnake.dk
         - "traefik.tcp.routers.mosquitto.entrypoints=mosquitto"
         - "traefik.tcp.routers.mosquitto.rule=HostSNI(`*`)"
         - "traefik.tcp.routers.mosquitto.service=mqt"
@@ -43,7 +45,10 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.role == manager
+          - node.role == manager 
 networks:
    traefik-public:
      external: true
+ 
+
+

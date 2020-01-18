@@ -1,0 +1,44 @@
+version: '3.7'
+services:
+  mariadb:
+    image: jagdriver/wavesnake:mariaDB-v1.0.1
+
+    environment:
+       MYSQL_ROOT_PASSWORD: wavesnake
+       MYSQL_DATABASE: history
+       MYSQL_USER: manager
+       MYSQL_PASSWORD: wavesnake
+
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql
+
+    ports:
+      - target: 3306
+        protocol: tcp
+        mode: host
+
+    networks:
+      - traefik-public
+
+    labels:
+      - "traefik.enable=true"
+
+      # This section id for local http access
+      - "traefik.tcp.routers.mariaint.entrypoints=mariadb"
+      - "traefik.tcp.routers.mariaint.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.mariaint.service=mariainternal"
+      - "traefik.tcp.services.mariainternal.loadBalancer.server.port=3306"
+
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints:
+          - node.role == manager
+
+networks:
+  traefik-public:
+    external: true
