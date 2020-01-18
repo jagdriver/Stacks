@@ -1,3 +1,3 @@
 ![HomeGuide Dashboard](/Artifacts/wavesnake.png)
 # Stacks
-This is a combined project fo all SnakeHome Docker Stack's 
+This is a combined project for all SnakeHome Docker Stack's 
