@@ -39,11 +39,20 @@ Select **git Repository**, fill in the information and click **Deploy the stac**
 
 ## Stacks <a name="stacks"></a>
 ### SnakeConfig <a name="snakeconfig"></a>
+Swarm configuration utility.
 ### SnakeApi <a name="snakeapi"></a>
+General API for managing Home Accessories.
 ### SnakeTimer <a name="snaketimer"></a>
+Timer applicatopn to support rules with timers.
 ### SnakeRule <a name="snakerule"></a>
+Rule engine, managing the rule base.
 ### SnakeHistory <a name="snakehistory"></a>
+History engine, save and retrieve accessory and group history.
 ### Redis <a name="reedis"></a>
+Swarm in memory key/value store.
 ### Mosquitto <a name="mosquitto"></a>
+Swarm Message Broker. 
 ### MariaDB <a name="mariadb"></a>
+Swarm DB.
 ### Apache <a name="apache"></a>
+Accessory sketch store and OTA update repository.
