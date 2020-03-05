@@ -22,7 +22,7 @@ services:
 
     volumes:
       - "/var/log/snakelogs:/var/snakelogs"
-      - "/opt/containers/swarmconfig/data:/root/wwwroot"
+      #- "/opt/containers/swarmconfig/data:/root/wwwroot"
 
 #    restart: always
 

@@ -1,0 +1,195 @@
+version: '3.7'
+
+#
+# Docker Compose file for SnakeApi, SnakeTimer, SnakeHistory, SnakeConfig and SnakeViz
+# This solution are deployed as a Stack Service
+# from Portainer
+# 
+#
+services:
+
+#
+# SnakeApi
+#
+  snakeapi:
+    image: jagdriver/wavesnake:snakeapi-v2.1.39
+
+    networks:
+       - traefik-public
+
+    volumes:
+       - "/var/snakelogs:/var/snakelogs"
+
+    labels:
+      # This section is for external http access
+      - "traefik.http.routers.api-external.entrypoints=web"
+      - "traefik.http.routers.api-external.rule=Host(`api.wavesnake.dk`)"
+      - "traefik.http.routers.api-external.service=apisvc-external"
+      - "traefik.http.services.apisvc-external.loadbalancer.server.port=80"
+      - "traefik.http.middlewares.api-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.api-external.middlewares=api-https-redirect"
+
+      # This section is for external https access
+      - "traefik.http.routers.api-secure.entrypoints=secure"
+      - "traefik.http.routers.api-secure.rule=Host(`api.wavesnake.dk`)"
+      - "traefik.http.routers.api-secure.tls=true"
+      - "traefik.http.routers.api-secure.tls.certresolver=http"
+      - "traefik.http.routers.api-secure.service=apisvc-secure"
+      - "traefik.http.services.apisvc-secure.loadbalancer.server.port=5000"
+
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints:
+          - node.role == manager
+#
+# SnakeHistory background service
+#
+
+  snakehistory: 
+    image: jagdriver/wavesnake:snakehistory-v1.0.6
+
+    networks:
+      - traefik-public
+
+    volumes:
+      - "/var/snakelogs:/var/snakelogs"
+
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints:
+          - node.role == manager
+
+#
+# SnakeTimer background service
+#
+
+  snaketimer: 
+    image: jagdriver/wavesnake:snaketimer-v1.0.0
+
+    networks:
+      - traefik-public
+
+    volumes:
+      - "/var/snakelogs:/var/snakelogs"
+
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints:
+          - node.role == manager
+
+#
+# SnakeConfig
+#
+
+  swarmconfig:
+    image: jagdriver/wavesnake:swarmconfig-v1.0.19
+
+    dns:
+      - 192.168.1.234
+
+    extra_hosts:
+      - "ws04.wavesnake.local:192.168.1.233"
+      - "redis.wavesnake.local:192.168.1.233"
+      - "api.wavesnake.dk:192.168.1.230"
+      - "cnfg.wavesnake.dk:192.168.1.230"
+
+    volumes:
+      - "/var/log/snakelogs:/var/snakelogs"
+      - "/opt/containers/swarmconfig/data:/root/wwwroot"
+
+    labels:
+      - "traefik.enable=true"
+
+      # This section id for local http access
+      - "traefik.http.routers.config-local.entrypoints=web"
+      - "traefik.http.routers.config-local.rule=Host(`config.wavesnake.local`)"
+      - "traefik.http.routers.config-local.service=config-local"
+      - "traefik.http.services.config-local.loadbalancer.server.port=6040"
+
+      # This section is for external http access
+      - "traefik.http.routers.config-external.entrypoints=web"
+      - "traefik.http.routers.config-external.rule=Host(`config.wavesnake.dk`)"
+      - "traefik.http.routers.config-external.service=config-external"
+      - "traefik.http.services.config-external.loadbalancer.server.port=6040"
+      - "traefik.http.middlewares.config-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.config-external.middlewares=config-https-redirect"
+
+      # This section is for external https access
+      - "traefik.http.routers.config-secure.entrypoints=secure"
+      - "traefik.http.routers.config-secure.rule=Host(`config.wavesnake.dk`)"
+      - "traefik.http.routers.config-secure.tls=true"
+      - "traefik.http.routers.config-secure.tls.certresolver=http"
+      - "traefik.http.routers.config-secure.service=config-secure"
+      - "traefik.http.services.config-secure.loadbalancer.server.port=6040"
+
+    networks:
+      - traefik-public
+
+
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints:
+          - node.role == manager
+#
+# SnakeViz
+#
+
+  snakeviz:
+    image: jagdriver/wavesnake:visualizer-v1.0.3
+
+    networks:
+      - traefik-public
+
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+    labels:
+      # This section is for external http access
+      - "traefik.http.routers.viz-external.entrypoints=web"
+      - "traefik.http.routers.viz-external.rule=Host(`viz.wavesnake.dk`)"
+      - "traefik.http.routers.viz-external.service=viz-external"
+      - "traefik.http.services.viz-external.loadbalancer.server.port=80"
+      - "traefik.http.middlewares.viz-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.viz-external.middlewares=viz-https-redirect"
+
+      # This section is for external https access
+      - "traefik.http.routers.viz-secure.entrypoints=secure"
+      - "traefik.http.routers.viz-secure.rule=Host(`viz.wavesnake.dk`)"
+      - "traefik.http.routers.viz-secure.tls=true"
+      - "traefik.http.routers.viz-secure.tls.certresolver=http"
+      - "traefik.http.routers.viz-secure.service=viz-secure"
+      - "traefik.http.services.viz-secure.loadbalancer.server.port=80"
+
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints:
+          - node.role == manager
+
+networks:
+  traefik-public:
+    external: true
