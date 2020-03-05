@@ -18,20 +18,20 @@
 This is a combined project for all SnakeHome Docker Stack's. Here you can read about installing the Docker containers onto your SnakeSwarm.
 
 ## Installation <a name="installation"></a>
-The installation of Docker Stacks is done from Portainer Dashboard, by going into Stacks -> Add stack and filling out the nescessary information. Before you get into action, gather together the information yoy will need.
+The installation of Docker Stacks is done from Portainer Dashboard, by going into **Stacks** -> **Add stack** and filling out the nescessary information. Before you get into action, gather together the information you will need.
 
 
-Name: The name of the stack example: SnakeConfig
-Repository URL: example: https://github.com/jagdriver/Stacks.git
-Compose path: example: SnakeConfig/docker-compose.yml
+**Name**: The name of the stack example: SnakeConfig
+**Repository URL**: example: https://github.com/jagdriver/Stacks.git
+**Compose path**: example: SnakeConfig/docker-compose.yml
 
 At this moment the repository are private, so we need Authentication.
-Authentication: Username: MyUser
-Authentication: Password: xxxxxxxx
+**Username**: MyUser
+**Password**: xxxxxxxx
 
 Thats all, when this information is in place, you can proceed.
 
-Select pit Repository, fill in the information and click "Deploy the stack"
+Select **git Repository**, fill in the information and click **Deploy the stac**
 
 ## Stacks <a name="stacks"></a>
 ### SnakeConfig <a name="snakeconfig"></a>
