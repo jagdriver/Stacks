@@ -22,11 +22,15 @@ The installation of Docker Stacks is done from Portainer Dashboard, by going int
 
 
 **Name**: The name of the stack example: SnakeConfig
+
 **Repository URL**: example: https://github.com/jagdriver/Stacks.git
+
 **Compose path**: example: SnakeConfig/docker-compose.yml
 
 At this moment the repository are private, so we need Authentication.
+
 **Username**: MyUser
+
 **Password**: xxxxxxxx
 
 Thats all, when this information is in place, you can proceed.
