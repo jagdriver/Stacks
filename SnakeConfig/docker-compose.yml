@@ -2,29 +2,20 @@
 version: '3.7'
 
 #
-# Docker Compose file for SwarmConfiguration
-# This solution are deployed as a Stack Service
-# from Portainer, and uses the docker-compose.yml file
-# from SnakeApi solution
+# Docker Compose file for SnakeConfig
+# This solution are deployed from Portainer
+# as a Swarm Stack Service.
 #
 services:
-  swarmconfig:
-    image: jagdriver/wavesnake:swarmconfig-v1.0.19
-
-    dns:
-      - 192.168.1.234
+  SnakeConfig:
+    image: jagdriver/wavesnake:snakeconfig
 
     extra_hosts:
-      - "ws04.wavesnake.local:192.168.1.233"
-      - "redis.wavesnake.local:192.168.1.233"
-      - "api.wavesnake.dk:192.168.1.230"
-      - "cnfg.wavesnake.dk:192.168.1.230"
+      - "redis.wavesnake.local:192.168.230.1"
 
     volumes:
-      - "/var/log/snakelogs:/var/snakelogs"
-      #- "/opt/containers/swarmconfig/data:/root/wwwroot"
-
-#    restart: always
+      - "/var/log/snakelogs:/var/log/snakelogs"
+      - "/var/run/docker.sock:/var/run/docker.sock"
 
     labels:
       - "traefik.enable=true"
