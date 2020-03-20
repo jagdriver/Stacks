@@ -1,0 +1,35 @@
+version: '3.7'
+
+#
+# WaveSnake 2020-03-20
+# Docker Compose file for SnakeTimer
+# This solution are deployed as a Stack Service
+# from Portainer
+#
+services:
+
+  snaketimer: 
+    image: jagdriver/wavesnake:snaketimer-v1.0.0
+
+    networks:
+      - traefik-public
+
+    volumes:
+      - "/var/log/snakelogs:/var/log/snakelogs"
+
+    extra_hosts:
+      - "redis.wavesnake.local:192.168.230.1"
+
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints:
+          - node.role == manager
+
+networks:
+  traefik-public:
+    external: true
