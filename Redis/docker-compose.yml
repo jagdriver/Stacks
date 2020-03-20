@@ -4,8 +4,7 @@ services:
     image: jagdriver/wavesnake:redis-v1.0.5
 
     volumes:
-      - /var/log/snakelogs:/var/snakelogs
-      #- /opt/containers/redis/data:/etc/redis
+      - /var/log/redis:/var/snakelogs
 
     ports:
       - target: 6379
