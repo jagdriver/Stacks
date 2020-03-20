@@ -18,7 +18,7 @@ services:
        - traefik-public
 
     volumes:
-       - "/var/log/snakelogs:/var/snakelogs"
+       - "/var/log/snakelogs:/var/log/snakelogs"
 
     extra_hosts:
       - "redis.wavesnake.local:192.168.230.1"
@@ -99,13 +99,13 @@ services:
       - traefik-public
 
     volumes:
-      - "/var/snakelogs:/var/snakelogs"
+      - "/var/log/snakelogs:/var/log/snakelogs"
 
     extra_hosts:
       - "redis.wavesnake.local:192.168.230.1"
 
     environment:
-      - LOG_PATH="/var/log/snakelogs/snakeTimer.log"
+      - LOG_PATH="/var/log/snakelogs/snaketimer.log"
       - REDIS_SERVER="redis.wavesnake.local"
       - REDIS_PORT="8214"
       - REDIS_INSTANCE="SnakeTimer"
@@ -125,7 +125,7 @@ services:
 # SnakeConfig
 #
   snakeconfig:
-    image: jagdriver/wavesnake:swarmconfig-v1.0.19
+    image: jagdriver/wavesnake:snakeconfig
 
     dns:
       - 192.168.1.234
@@ -143,7 +143,7 @@ services:
       - ENVIRONMENT_LIST="development:development,test:test,production:production"
 
     volumes:
-      - "/var/log/snakelogs:/var/snakelogs"
+      - "/var/log/snakelogs:/var/log/snakelogs"
 
     labels:
       - "traefik.enable=true"
@@ -194,7 +194,7 @@ services:
       - traefik-public
 
     volumes:
-      - "/var/log/snakelogs:/var/snakelogs"
+      - "/var/log/snakelogs:/var/log/snakelogs"
 
     extra_hosts:
       - "redis.wavesnake.local:192.168.230.1"
