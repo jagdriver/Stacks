@@ -20,6 +20,8 @@ services:
       - "redis.wavesnake.local:192.168.230.1"
 
     labels:
+      - "traefik.enable=true"
+      
       # This section is for external http access
       - "traefik.http.routers.api-external.entrypoints=web"
       - "traefik.http.routers.api-external.rule=Host(`api.wavesnake.dk`)"
