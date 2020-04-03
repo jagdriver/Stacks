@@ -12,7 +12,7 @@ services:
 
     extra_hosts:
       - "redis.wavesnake.local:192.168.230.1"
-      - "api.wavesnake.dk:192.168.1.230"
+      - "api.wavesnake.local:192.168.1.230"
 
     volumes:
       - "/var/log/snakelogs:/var/log/snakelogs"
