@@ -42,8 +42,8 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.labels.wsnode == ws02
-          #- node.role==manager
+          #- node.labels.wsnode == ws02
+          - node.role==manager
 
 networks:
   traefik-public:
