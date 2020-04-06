@@ -18,31 +18,6 @@ services:
       - "/var/log/snakelogs:/var/log/snakelogs"
       - "/var/run/docker.sock:/var/run/docker.sock"
 
-    labels:
-      - "traefik.enable=true"
-
-      # This section id for local http access
-      - "traefik.http.routers.config-local.entrypoints=web"
-      - "traefik.http.routers.config-local.rule=Host(`config.wavesnake.local`)"
-      - "traefik.http.routers.config-local.service=config-local"
-      - "traefik.http.services.config-local.loadbalancer.server.port=6040"
-
-      # This section is for external http access
-      - "traefik.http.routers.config-external.entrypoints=web"
-      - "traefik.http.routers.config-external.rule=Host(`config.wavesnake.dk`)"
-      - "traefik.http.routers.config-external.service=config-external"
-      - "traefik.http.services.config-external.loadbalancer.server.port=6040"
-      - "traefik.http.middlewares.config-https-redirect.redirectscheme.scheme=https"
-      - "traefik.http.routers.config-external.middlewares=config-https-redirect"
-
-      # This section is for external https access
-      - "traefik.http.routers.config-secure.entrypoints=secure"
-      - "traefik.http.routers.config-secure.rule=Host(`config.wavesnake.dk`)"
-      - "traefik.http.routers.config-secure.tls=true"
-      - "traefik.http.routers.config-secure.tls.certresolver=http"
-      - "traefik.http.routers.config-secure.service=config-secure"
-      - "traefik.http.services.config-secure.loadbalancer.server.port=6040"
-
     networks:
       - traefik-public
 
@@ -54,7 +29,33 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.role == manager
+          - node.labels.wsnode == ws02
+          
+      labels:
+        - "traefik.enable=true"
+
+        # This section id for local http access
+        - "traefik.http.routers.config-local.entrypoints=web"
+        - "traefik.http.routers.config-local.rule=Host(`config.wavesnake.local`)"
+        - "traefik.http.routers.config-local.service=config-local"
+        - "traefik.http.services.config-local.loadbalancer.server.port=6040"
+
+        # This section is for external http access
+        - "traefik.http.routers.config-external.entrypoints=web"
+        - "traefik.http.routers.config-external.rule=Host(`config.wavesnake.dk`)"
+        - "traefik.http.routers.config-external.service=config-external"
+        - "traefik.http.services.config-external.loadbalancer.server.port=6040"
+        - "traefik.http.middlewares.config-https-redirect.redirectscheme.scheme=https"
+        - "traefik.http.routers.config-external.middlewares=config-https-redirect"
+
+        # This section is for external https access
+        - "traefik.http.routers.config-secure.entrypoints=secure"
+        - "traefik.http.routers.config-secure.rule=Host(`config.wavesnake.dk`)"
+        - "traefik.http.routers.config-secure.tls=true"
+        - "traefik.http.routers.config-secure.tls.certresolver=http"
+        - "traefik.http.routers.config-secure.service=config-secure"
+        - "traefik.http.services.config-secure.loadbalancer.server.port=6040"
+
 
 networks:
   traefik-public:

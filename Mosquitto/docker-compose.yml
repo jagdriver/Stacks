@@ -19,7 +19,16 @@ services:
         - "/opt/containers/mosquitto/config/conf.d/acl:/mosquitto/config/conf.d/acl"
         - "/opt/containers/mosquitto/config/conf.d/pw:/mosquitto/config/conf.d/pw"
 
-    labels:
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints:
+          - node.labels.wsnode == ws03
+      labels:
         - "traefik.enable=true"
 
         # This if for internal access to Mosquitto
@@ -37,15 +46,6 @@ services:
         #- "traefik.tcp.routers.mosquitto.tls.domains[0].main=mqt.wavesnake.dk"
         - "traefik.tcp.services.mqt.loadBalancer.server.port=1883"
 
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
-      placement:
-        constraints:
-          - node.role == manager 
 networks:
    traefik-public:
      external: true

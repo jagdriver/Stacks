@@ -14,15 +14,6 @@ services:
     networks:
       - traefik-public
 
-    labels:
-      - "traefik.enable=true"
-
-      # This section id for local http access
-      - "traefik.tcp.routers.redisint.entrypoints=redis"
-      - "traefik.tcp.routers.redisint.rule=HostSNI(`*`)"
-      - "traefik.tcp.routers.redisint.service=redisinternal"
-      - "traefik.tcp.services.redisinternal.loadBalancer.server.port=6379"
-
     deploy:
       restart_policy:
         condition: on-failure
@@ -32,6 +23,14 @@ services:
       placement:
         constraints:
           - node.role == manager
+      labels:
+        - "traefik.enable=true"
+
+        # This section id for local http access
+        - "traefik.tcp.routers.redisint.entrypoints=redis"
+        - "traefik.tcp.routers.redisint.rule=HostSNI(`*`)"
+        - "traefik.tcp.routers.redisint.service=redisinternal"
+        - "traefik.tcp.services.redisinternal.loadBalancer.server.port=6379"
 
 networks:
   traefik-public:
