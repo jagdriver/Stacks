@@ -4,10 +4,10 @@ services:
     image: jagdriver/wavesnake:mariaDB-v1.0.1
 
     environment:
-       MYSQL_ROOT_PASSWORD: wavesnake
+       MYSQL_ROOT_PASSWORD: "${ROOT_PASSWORD}"
        MYSQL_DATABASE: history
        MYSQL_USER: manager
-       MYSQL_PASSWORD: wavesnake
+       MYSQL_PASSWORD: "${MANAGER_PASSWORD}"
 
     volumes:
       - /opt/containers/mariadb/data:/var/lib/mysql
