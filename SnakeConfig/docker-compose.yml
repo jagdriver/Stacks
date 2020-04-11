@@ -1,6 +1,5 @@
 
 version: '3.7'
-
 #
 # Docker Compose file for SnakeConfig
 # This solution are deployed from Portainer
