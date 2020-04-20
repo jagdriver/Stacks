@@ -5,6 +5,8 @@ services:
 
     volumes:
       - /var/log/redis:/var/snakelogs
+      - /opt/containers/redis/data:/data
+      - /opt/containers/redis/conf;/etc/redis
 
     ports:
       - target: 6379
