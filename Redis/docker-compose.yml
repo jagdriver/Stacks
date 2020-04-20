@@ -1,7 +1,8 @@
 version: '3.7'
 services:
   redis:
-    image: jagdriver/wavesnake:redis-v1.0.5
+    #image: jagdriver/wavesnake:redis-v1.0.5
+    image: jagdriver/wavesnake:redis
 
     volumes:
       - /var/log/redis:/var/snakelogs
