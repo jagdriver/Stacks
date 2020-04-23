@@ -37,7 +37,7 @@ services:
         - "traefik.tcp.routers.mqtint.service=mqtinternal"
         - "traefik.tcp.services.mqtinternal.loadBalancer.server.port=1883"
         
-        # This is for external access to Mosquitto, using self signed certificat mqt.wavesnake.dk
+        # This is for external access to Mosquitto, using certificat mqt.wavesnake.dk
         - "traefik.tcp.routers.mosquitto.entrypoints=mosquitto"
         - "traefik.tcp.routers.mosquitto.rule=HostSNI(`*`)"
         - "traefik.tcp.routers.mosquitto.service=mqt"
