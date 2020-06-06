@@ -18,6 +18,8 @@ services:
       - "api.wavesnake.local:192.168.1.230"
 
     volumes:
+      - "/opt/containers/synchronization:/opt/containers/synchronization"
+      - "/opt/containers/environment:/opt/containers/environment"
       - "/var/log/snakelogs:/var/log/snakelogs"
       - "/var/run/docker.sock:/var/run/docker.sock"
 
@@ -32,7 +34,7 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.labels.wsnode == ws02
+          - node.labels.wsnode == ws01
           
       labels:
         - "traefik.enable=true"
