@@ -15,7 +15,7 @@ services:
       - traefik-public
 
     volumes:
-      - "/var/log/snakelogs:/var/snakelogs"
+      - "/var/log/snakelogs:/var/log/snakelogs"
 
     environment:
        MANAGER_PASSWORD: "${MANAGER_PASSWORD}"
