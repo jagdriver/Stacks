@@ -8,7 +8,7 @@ version: '3.7'
 #
 services:
 
-  snakehistory: 
+  snakehistory1: 
     image: jagdriver/wavesnake:snakehistory
 
     networks:
