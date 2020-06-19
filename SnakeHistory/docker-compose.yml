@@ -17,6 +17,9 @@ services:
     volumes:
       - "/var/log/snakelogs:/var/snakelogs"
 
+    environment:
+       MANAGER_PASSWORD: "${MANAGER_PASSWORD}"
+
     extra_hosts:
       - "redis.wavesnake.local:192.168.230.1"
       - "mqt.wavesnake.local:192.168.230.1"
