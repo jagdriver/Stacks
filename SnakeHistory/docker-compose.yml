@@ -1,10 +1,14 @@
 version: '3.7'
 
 #
-# WaveSnake 2020-03-20 
+# WaveSnake 2020-06-22
 # Docker Compose file for SnakeHistory.
 # This solution are deployed from Portainer as a 
 # Stack Service.
+#
+# OBS! 
+# In Portainer Stack Deploy:
+# Remember to add Environment variable MANAGER_PASSWORD
 #
 services:
 
