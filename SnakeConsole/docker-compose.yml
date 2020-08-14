@@ -1,0 +1,60 @@
+
+version: '3.7'
+#
+# Docker Compose file for SnakeConsole
+# This solution are deployed from Portainer
+# as a Swarm Stack Service.
+#
+services:
+  SnakeConfig1:
+    image: jagdriver/wavesnake:snakeconsole
+
+    extra_hosts:
+      - "console.wavesnake.local:192.168.1.230"
+      - "api.wavesnake.local:192.168.1.230"
+
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+    networks:
+      - traefik-public
+
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints:
+          - node.labels.wsnode == ws03
+          
+      labels:
+        - "traefik.enable=true"
+
+        # This section id for local http access
+        - "traefik.http.routers.config-local.entrypoints=web"
+        - "traefik.http.routers.config-local.rule=Host(`console.wavesnake.local`)"
+        - "traefik.http.routers.config-local.service=config-local"
+        - "traefik.http.services.config-local.loadbalancer.server.port=6090"
+
+        # This section is for external http access
+        - "traefik.http.routers.config-external.entrypoints=web"
+        - "traefik.http.routers.config-external.rule=Host(`console.wavesnake.dk`)"
+        - "traefik.http.routers.config-external.service=config-external"
+        - "traefik.http.services.config-external.loadbalancer.server.port=6090"
+        - "traefik.http.middlewares.config-https-redirect.redirectscheme.scheme=https"
+        - "traefik.http.routers.config-external.middlewares=config-https-redirect"
+
+        # This section is for external https access
+        - "traefik.http.routers.config-secure.entrypoints=secure"
+        - "traefik.http.routers.config-secure.rule=Host(`console.wavesnake.dk`)"
+        - "traefik.http.routers.config-secure.tls=true"
+        - "traefik.http.routers.config-secure.tls.certresolver=http"
+        - "traefik.http.routers.config-secure.service=config-secure"
+        - "traefik.http.services.config-secure.loadbalancer.server.port=6090"
+
+
+networks:
+  traefik-public:
+    external: true
