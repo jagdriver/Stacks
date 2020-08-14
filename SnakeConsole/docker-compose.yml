@@ -36,13 +36,13 @@ services:
         - "traefik.http.routers.console-local.entrypoints=web"
         - "traefik.http.routers.console-local.rule=Host(`console.wavesnake.local`)"
         - "traefik.http.routers.console-local.service=console-local"
-        - "traefik.http.services.console-local.loadbalancer.server.port=6090"
+        - "traefik.http.services.console-local.loadbalancer.server.port=80"
 
         # This section is for external http access
         - "traefik.http.routers.console-external.entrypoints=web"
         - "traefik.http.routers.console-external.rule=Host(`console.wavesnake.dk`)"
         - "traefik.http.routers.console-external.service=console-external"
-        - "traefik.http.services.console-external.loadbalancer.server.port=6090"
+        - "traefik.http.services.console-external.loadbalancer.server.port=80"
         - "traefik.http.middlewares.console-https-redirect.redirectscheme.scheme=https"
         - "traefik.http.routers.console-external.middlewares=console-https-redirect"
 
@@ -52,7 +52,7 @@ services:
         - "traefik.http.routers.console-secure.tls=true"
         - "traefik.http.routers.console-secure.tls.certresolver=http"
         - "traefik.http.routers.console-secure.service=console-secure"
-        - "traefik.http.services.console-secure.loadbalancer.server.port=6090"
+        - "traefik.http.services.console-secure.loadbalancer.server.port=80"
 
 
 networks:
