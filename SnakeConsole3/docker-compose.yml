@@ -1,0 +1,60 @@
+
+version: '3.7'
+#
+# Docker Compose file for SnakeConsole
+# This solution are deployed from Portainer
+# as a Swarm Stack Service.
+#
+services:
+  SnakeConsole:
+    image: jagdriver/wavesnake:SnakeConsole3
+
+    extra_hosts:
+      - "console.wavesnake.local:192.168.1.230"
+      - "api.wavesnake.local:192.168.1.230"
+
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+    networks:
+      - traefik-public
+
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints:
+          - node.labels.wsnode == ws03
+          
+      labels:
+        - "traefik.enable=true"
+
+        # This section id for local http access
+        - "traefik.http.routers.console-local.entrypoints=web"
+        - "traefik.http.routers.console-local.rule=Host(`console.wavesnake.local`)"
+        - "traefik.http.routers.console-local.service=console-local"
+        - "traefik.http.services.console-local.loadbalancer.server.port=80"
+
+        # This section is for external http access
+        - "traefik.http.routers.console-external.entrypoints=web"
+        - "traefik.http.routers.console-external.rule=Host(`console.wavesnake.dk`)"
+        - "traefik.http.routers.console-external.service=console-external"
+        - "traefik.http.services.console-external.loadbalancer.server.port=80"
+        - "traefik.http.middlewares.console-https-redirect.redirectscheme.scheme=https"
+        - "traefik.http.routers.console-external.middlewares=console-https-redirect"
+
+        # This section is for external https access
+        - "traefik.http.routers.console-secure.entrypoints=secure"
+        - "traefik.http.routers.console-secure.rule=Host(`console.wavesnake.dk`)"
+        - "traefik.http.routers.console-secure.tls=true"
+        - "traefik.http.routers.console-secure.tls.certresolver=http"
+        - "traefik.http.routers.console-secure.service=console-secure"
+        - "traefik.http.services.console-secure.loadbalancer.server.port=80"
+
+
+networks:
+  traefik-public:
+    external: true
