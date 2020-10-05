@@ -1,8 +1,12 @@
 version: '3.7'
+#
+# Docker Compose file for Redis
+# This solution are deployed from Portainer
+# as a Swarm Stack Service.
+#
 services:
   redis:
     image: jagdriver/wavesnake:redis
-    #image: jagdriver/wavesnake:redis
 
     volumes:
       - /var/log/redis:/var/snakelogs

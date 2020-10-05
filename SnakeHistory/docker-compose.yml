@@ -1,5 +1,4 @@
 version: '3.7'
-
 #
 # WaveSnake 2020-06-22
 # Docker Compose file for SnakeHistory.

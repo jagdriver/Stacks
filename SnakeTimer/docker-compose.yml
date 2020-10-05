@@ -1,5 +1,4 @@
 version: '3.7'
-
 #
 # WaveSnake 2020-03-20
 # Docker Compose file for SnakeTimer
@@ -22,7 +21,7 @@ services:
 
     deploy:
       restart_policy:
-        condition: on-failure
+        condition: any
         delay: 5s
         max_attempts: 3
         window: 120s

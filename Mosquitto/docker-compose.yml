@@ -1,5 +1,9 @@
-version: '3.7' # Mosquitto on Traefik 2
-
+version: '3.7'
+#
+# Docker Compose file for Mosquitto
+# This solution are deployed from Portainer
+# as a Swarm Stack Service.
+#
 services:
   mosquitto:
     image: jagdriver/wavesnake:mosquitto-v1.0.6
