@@ -1,4 +1,9 @@
 version: '3.7'
+#
+# Docker Compose file for Apache
+# This solution are deployed from Portainer
+# as a Swarm Stack Service.
+#
 services:
   apache:
     image: jagdriver/wavesnake:apache
@@ -11,7 +16,7 @@ services:
 
     deploy:
       restart_policy:
-        condition: on-failure
+        condition: any
         delay: 5s
         max_attempts: 3
         window: 120s
