@@ -42,7 +42,7 @@ Select **git Repository**, fill in the information and click **Deploy the stac**
 ## Stacks <a name="stacks"></a>
 ### SnakeConfig <a name="snakeconfig"></a>
 Swarm configuration utility.
-### SnakeUtil <a name="snakeutil"</a>
+### SnakeUtil <a name="snakeutil"></a>
 Swarm DNS and file synchronization utility.
 ### SnakeApi <a name="snakeapi"></a>
 General API for managing Home Accessories.
