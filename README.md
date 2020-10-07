@@ -5,7 +5,7 @@
 2. [Installation](#installation)
 3. [Stacks](#stacks)
     1. [SnakeConfig](#snakeconfig)
-    2. [SnakeUtil]#snakeutil)
+    2. [SnakeUtil](#snakeutil)
     3. [SnakeApi](#snakeapi)
     4. [SnakeTimer](#snaketimer)
     5. [SnakeRule](#snakerule)
