@@ -5,14 +5,15 @@
 2. [Installation](#installation)
 3. [Stacks](#stacks)
     1. [SnakeConfig](#snakeconfig)
-    2. [SnakeApi](#snakeapi)
-    3. [SnakeTimer](#snaketimer)
-    4. [SnakeRule](#snakerule)
-    5. [SnakeHistory](#snakistory)
-    6. [Redis](#redis)
-    7. [Mosquitto](#mosquitto)
-    8. [MariaDB](#mariadb)
-    9. [Apache](#apache)
+    2. [SnakeUtil]#snakeutil)
+    3. [SnakeApi](#snakeapi)
+    4. [SnakeTimer](#snaketimer)
+    5. [SnakeRule](#snakerule)
+    6. [SnakeHistory](#snakistory)
+    7. [Redis](#redis)
+    8. [Mosquitto](#mosquitto)
+    9. [MariaDB](#mariadb)
+    10. [Apache](#apache)
 
 ## Introduction <a name="introduction"></a>
 This is a combined project for all SnakeHome Docker Stack's. Here you can read about installing the Docker containers onto your SnakeSwarm.
@@ -41,6 +42,8 @@ Select **git Repository**, fill in the information and click **Deploy the stac**
 ## Stacks <a name="stacks"></a>
 ### SnakeConfig <a name="snakeconfig"></a>
 Swarm configuration utility.
+### SnakeUtil <a name="snakeutil"</a>
+Swarm DNS and file synchronization utility.
 ### SnakeApi <a name="snakeapi"></a>
 General API for managing Home Accessories.
 ### SnakeTimer <a name="snaketimer"></a>
