@@ -11,9 +11,10 @@
     5. [SnakeRule](#snakerule)
     6. [SnakeHistory](#snakistory)
     7. [Redis](#redis)
-    8. [Mosquitto](#mosquitto)
-    9. [MariaDB](#mariadb)
-    10. [Apache](#apache)
+    8. [RedisReplica](#redisreplica)
+    9. [Mosquitto](#mosquitto)
+    10. [MariaDB](#mariadb)
+    11. [Apache](#apache)
 
 ## Introduction <a name="introduction"></a>
 This is a combined project for all SnakeHome Docker Stack's. Here you can read about installing the Docker containers onto your SnakeSwarm.
@@ -51,8 +52,10 @@ Timer applicatopn to support rules with timers.
 Rule engine, managing the rule base.
 ### SnakeHistory <a name="snakehistory"></a>
 History engine, save and retrieve accessory and group history.
-### Redis <a name="reedis"></a>
+### Redis <a name="redis"></a>
 Swarm in memory key/value store.
+### Redis Replica <a name="redisreplica"></a>
+Swarm in memory replica key/value store.
 ### Mosquitto <a name="mosquitto"></a>
 Swarm Message Broker. 
 ### MariaDB <a name="mariadb"></a>
