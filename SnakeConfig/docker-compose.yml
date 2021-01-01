@@ -11,7 +11,7 @@ services:
     environment:
        ROOT_PASSWORD: "${ROOT_PASSWORD}"
        MANAGER_PASSWORD: "${MANAGER_PASSWORD}"
-       GLOBAL_CONFIGURATION_PATH: "/opt/containers/configuration/globalconfig.json"
+       GLOBAL_CONFIG_PATH: "/opt/containers/configuration/globalconfig.json"
 
     extra_hosts:
       - "redis.wavesnake.local:192.168.230.1"
