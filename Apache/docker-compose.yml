@@ -10,7 +10,8 @@ services:
     
     volumes:
       - /opt/containers/apache/data:/var/www/html
-
+      - /mnt/config:/opt/config
+      
     networks:
       - traefik-public
 
@@ -22,7 +23,7 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.labels.wsnode == ws02
+          - node.labels.wsnode == sn01
 
       labels:
         - "traefik.enable=true"

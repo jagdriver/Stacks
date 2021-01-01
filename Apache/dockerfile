@@ -4,6 +4,7 @@ MAINTAINER jagdriver@wavesnake.com
 # Remove default apache landing page and copy your files to working directory /var/www/html
 # RUN rm /var/www/html/index.html
 # ADD ./ /var/www/html
+
 # RUN chmod -R 0755 /var/www/html
 
 EXPOSE 80
