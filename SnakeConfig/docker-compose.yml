@@ -19,6 +19,7 @@ services:
     volumes:
       - "/opt/containers/synchronization:/opt/containers/synchronization"
       - "/opt/containers/environment:/opt/containers/environment"
+      - "/opt/containers/configuration:/opt/containers/configuration"
       - "/var/log/snakelogs:/var/log/snakelogs"
       - "/var/run/docker.sock:/var/run/docker.sock"
 
