@@ -36,7 +36,7 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.labels.wsnode == ws02
+          - node.labels.wsnode == sn02
 
 networks:
   traefik-public:

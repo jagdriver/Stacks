@@ -35,7 +35,7 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.labels.wsnode == sn01
+          - node.role == manager
           
       labels:
         - "traefik.enable=true"

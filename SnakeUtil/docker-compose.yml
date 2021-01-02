@@ -2,7 +2,8 @@ version: '3.7'
 #
 # Docker Compose file for SnakeUtil
 # This solution are deployed as a Stack Service
-# from Portainer
+# from Portainer, and run on every node in the 
+# swarm.
 # 
 #
 services:
@@ -31,9 +32,6 @@ services:
         delay: 5s
         max_attempts: 3
         window: 120s
-#      placement:
-#        constraints:
-#          - node.labels.wsnode == ws02
 
 networks:
   traefik-public:
