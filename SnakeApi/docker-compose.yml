@@ -31,7 +31,7 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.labels.wsnode == sn02
+          - node.labels.wsnode == sn01
       labels:
         - "traefik.enable=true"
 
