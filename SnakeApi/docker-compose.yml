@@ -18,6 +18,7 @@ services:
 
     volumes:
        - "/var/log/snakelogs:/var/log/snakelogs"
+       - "/mnt/config:/opt/containers"
 
     extra_hosts:
       - "redis.wavesnake.local:192.168.230.1"
