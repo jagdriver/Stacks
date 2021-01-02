@@ -15,7 +15,7 @@ services:
 
     extra_hosts:
       - "redis.wavesnake.local:192.168.230.1"
-      - "api.wavesnake.local:192.168.1.230"
+      - "api.wavesnake.local:192.168.1.220"
 
     volumes:
       - "/opt/containers/synchronization:/opt/containers/synchronization"

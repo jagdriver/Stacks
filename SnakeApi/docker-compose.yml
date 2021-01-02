@@ -21,8 +21,8 @@ services:
        - "/mnt/config:/opt/containers"
 
     extra_hosts:
-      - "redis.wavesnake.local:192.168.230.1"
-      - "db.wavesnake.local:192.168.230.1"
+      - "redis.wavesnake.local:192.168.220.1"
+      - "db.wavesnake.local:192.168.220.1"
 
     deploy:
       restart_policy:
