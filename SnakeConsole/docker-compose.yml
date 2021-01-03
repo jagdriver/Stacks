@@ -9,8 +9,8 @@ services:
     image: jagdriver/wavesnake:snakeconsole
 
     extra_hosts:
-      - "console.wavesnake.local:192.168.1.230"
-      - "api.wavesnake.local:192.168.1.230"
+      - "console.wavesnake.local:192.168.1.220"
+      - "api.wavesnake.local:192.168.1.220"
 
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
@@ -26,7 +26,7 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.labels.wsnode == sn04
+          - node.labels.wsnode == sn01
           
       labels:
         - "traefik.enable=true"
