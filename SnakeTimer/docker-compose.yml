@@ -13,6 +13,9 @@ services:
     networks:
       - traefik-public
 
+    secrets:
+      - SwarmSecret
+
     volumes:
       - "/var/log/snakelogs:/var/log/snakelogs"
 
@@ -28,6 +31,10 @@ services:
       placement:
         constraints:
           - node.labels.wsnode == sn03
+
+secrets:
+  SwarmSecret:
+    external: true
 
 networks:
   traefik-public:

@@ -14,11 +14,14 @@ services:
        MANAGER_PASSWORD: "${MANAGER_PASSWORD}"
 
     networks:
-       - traefik-public
+      - traefik-public
+
+    secrets:
+      - SwarmSecret
 
     volumes:
-       - "/var/log/snakelogs:/var/log/snakelogs"
-       - "/mnt/config:/opt/containers"
+      - "/var/log/snakelogs:/var/log/snakelogs"
+      - "/mnt/config:/opt/containers"
 
     extra_hosts:
       - "redis.wavesnake.local:192.168.220.1"
@@ -58,6 +61,10 @@ services:
         - "traefik.http.routers.api-secure.tls.certresolver=http"
         - "traefik.http.routers.api-secure.service=apisvc-secure"
         - "traefik.http.services.apisvc-secure.loadbalancer.server.port=5000"
+
+secrets:
+  SwarmSecret:
+    external: true
 
 networks:
   traefik-public:

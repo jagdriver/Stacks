@@ -27,6 +27,9 @@ services:
     networks:
       - traefik-public
 
+    secrets:
+        - SwarmSecret
+
     deploy:
       restart_policy:
         condition: any
@@ -62,6 +65,9 @@ services:
         - "traefik.http.routers.config-secure.service=config-secure"
         - "traefik.http.services.config-secure.loadbalancer.server.port=6040"
 
+secrets:
+  SwarmSecret:
+    external: true
 
 networks:
   traefik-public:

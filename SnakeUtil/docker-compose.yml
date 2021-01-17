@@ -13,6 +13,9 @@ services:
 
     networks:
       - traefik-public
+    
+    secrets:
+      - SwarmSecret
 
     environment:
       DNS_PASSWORD: "${DNS_PASSWORD}"
@@ -32,6 +35,10 @@ services:
         delay: 5s
         max_attempts: 3
         window: 120s
+
+secrets:
+  SwarmSecret:
+    external: true
 
 networks:
   traefik-public:

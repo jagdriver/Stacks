@@ -20,7 +20,7 @@ services:
       - traefik-public
 
     secrets:
-        - SwarmSecrets
+        - SwarmSecret
 
     deploy:
       restart_policy:
@@ -58,7 +58,7 @@ services:
         - "traefik.http.services.console-secure.loadbalancer.server.port=80"
 
 secrets:
-  SwarmSecrets:
+  SwarmSecret:
     external: true
 
 networks:
