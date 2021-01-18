@@ -35,13 +35,19 @@ services:
       labels:
         - "traefik.enable=true"
 
-        # This section id for local http access
+        # This section is for console.wavesnake.local http access
         - "traefik.http.routers.console-local.entrypoints=web"
         - "traefik.http.routers.console-local.rule=Host(`console.wavesnake.local`)"
         - "traefik.http.routers.console-local.service=console-local"
         - "traefik.http.services.console-local.loadbalancer.server.port=80"
 
-        # This section is for external http access
+        # This section is for console.wavesnake.local http access to backend server
+        - "traefik.http.routers.console-server-local.entrypoints=web"
+        - "traefik.http.routers.console-server-local.rule=Host(`consoleapi.wavesnake.local`)"
+        - "traefik.http.routers.console-server-local.service=console-server-local"
+        - "traefik.http.services.console-server-local.loadbalancer.server.port=4000"
+
+        # This section is for console.wavesnake.dk external http redirect
         - "traefik.http.routers.console-external.entrypoints=web"
         - "traefik.http.routers.console-external.rule=Host(`console.wavesnake.dk`)"
         - "traefik.http.routers.console-external.service=console-external"
@@ -49,13 +55,29 @@ services:
         - "traefik.http.middlewares.console-https-redirect.redirectscheme.scheme=https"
         - "traefik.http.routers.console-external.middlewares=console-https-redirect"
 
-        # This section is for external https access
+        # This section is for consoleapi.wavesnake.dk external http redirect
+        - "traefik.http.routers.console-server-external.entrypoints=web"
+        - "traefik.http.routers.console-server-external.rule=Host(`consoleapi.wavesnake.dk`)"
+        - "traefik.http.routers.console-server-external.service=console-server-external"
+        - "traefik.http.services.console-server-external.loadbalancer.server.port=80"
+        - "traefik.http.middlewares.console-server-https-redirect.redirectscheme.scheme=https"
+        - "traefik.http.routers.console-server-external.middlewares=console-server-https-redirect"
+
+        # This section is for console.wavesnake.dk external https access
         - "traefik.http.routers.console-secure.entrypoints=secure"
         - "traefik.http.routers.console-secure.rule=Host(`console.wavesnake.dk`)"
         - "traefik.http.routers.console-secure.tls=true"
         - "traefik.http.routers.console-secure.tls.certresolver=http"
         - "traefik.http.routers.console-secure.service=console-secure"
         - "traefik.http.services.console-secure.loadbalancer.server.port=80"
+
+        # This section is for consoleapi.wavesnake.dk external https access
+        - "traefik.http.routers.console-server-secure.entrypoints=secure"
+        - "traefik.http.routers.console-server-secure.rule=Host(`console.wavesnake.dk`)"
+        - "traefik.http.routers.console-server-secure.tls=true"
+        - "traefik.http.routers.console-server-secure.tls.certresolver=http"
+        - "traefik.http.routers.console-server-secure.service=console-server-secure"
+        - "traefik.http.services.console-server-secure.loadbalancer.server.port=4000"
 
 secrets:
   SwarmSecret:
