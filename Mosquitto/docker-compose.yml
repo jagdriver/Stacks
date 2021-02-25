@@ -19,7 +19,7 @@ services:
     volumes:
         # - "/opt/containers/mosquitto/data:/mosquitto/data"
         - "/mnt/config/mosquitto/data:/mosquitto/data"
-        - "/var/log/mosquitto:/mosquitto/log"
+        - "/var/log/snakelogs:/mosquitto/log"
         - "/mnt/config/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf"
         - "/mnt/config/mosquitto/config/conf.d/acl:/mosquitto/config/conf.d/acl"
         - "/mnt/config/mosquitto/config/conf.d/pw:/mosquitto/config/conf.d/pw"
