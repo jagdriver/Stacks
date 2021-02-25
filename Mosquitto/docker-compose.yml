@@ -17,11 +17,12 @@ services:
       - traefik-public
 
     volumes:
-        - "/opt/containers/mosquitto/data:/mosquitto/data"
+        # - "/opt/containers/mosquitto/data:/mosquitto/data"
+        - "/mnt/config/mosquitto/data:/mosquitto/data"
         - "/var/log/mosquitto:/mosquitto/log"
-        - "/opt/containers/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf"
-        - "/opt/containers/mosquitto/config/conf.d/acl:/mosquitto/config/conf.d/acl"
-        - "/opt/containers/mosquitto/config/conf.d/pw:/mosquitto/config/conf.d/pw"
+        - "/mnt/config/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf"
+        - "/mnt/config/mosquitto/config/conf.d/acl:/mosquitto/config/conf.d/acl"
+        - "/mnt/config/mosquitto/config/conf.d/pw:/mosquitto/config/conf.d/pw"
 
     deploy:
       restart_policy:
@@ -31,7 +32,7 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.labels.wsnode == sn03
+          - node.labels.wsnode == sn01
       labels:
         - "traefik.enable=true"
 
