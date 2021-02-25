@@ -1,0 +1,32 @@
+version: '3.7'
+#
+# WaveSnake 2020-03-20
+# Docker Compose file for SnakeZig
+# This solution are deployed as a Stack Service
+# from Portainer
+#
+services:
+
+  snaketimer: 
+    image: jagdriver/wavesnake:snakezig
+
+    networks:
+      - traefik-public
+
+    volumes:
+      - "/mnt/config/snakezig/data:/app/data"
+      - "/dev/cc2531:/dev/cc2531"
+
+    deploy:
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints:
+          - node.labels.wsnode == sn01
+
+networks:
+  traefik-public:
+    external: true
