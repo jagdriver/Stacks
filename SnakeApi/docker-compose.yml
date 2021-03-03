@@ -50,7 +50,7 @@ services:
         - "traefik.http.routers.api-external.entrypoints=web"
         - "traefik.http.routers.api-external.rule=Host(`api.wavesnake.dk`)"
         - "traefik.http.routers.api-external.service=apisvc-external"
-        - "traefik.http.services.apisvc-external.loadbalancer.server.port=80"
+        - "traefik.http.services.apisvc-external.loadbalancer.server.port=5000"
         - "traefik.http.middlewares.api-https-redirect.redirectscheme.scheme=https"
         - "traefik.http.routers.api-external.middlewares=api-https-redirect"
 

@@ -73,7 +73,7 @@ services:
 
         # This section is for consoleapi.wavesnake.dk external https access
         - "traefik.http.routers.console-server-secure.entrypoints=secure"
-        - "traefik.http.routers.console-server-secure.rule=Host(`console.wavesnake.dk`)"
+        - "traefik.http.routers.console-server-secure.rule=Host(`consoleapi.wavesnake.dk`)"
         - "traefik.http.routers.console-server-secure.tls=true"
         - "traefik.http.routers.console-server-secure.tls.certresolver=http"
         - "traefik.http.routers.console-server-secure.service=console-server-secure"
