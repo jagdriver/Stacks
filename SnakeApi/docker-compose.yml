@@ -24,8 +24,8 @@ services:
       - "/mnt/config:/opt/containers"
 
     extra_hosts:
-      - "redis.wavesnake.local:192.168.220.1"
-      - "db.wavesnake.local:192.168.220.1"
+      - "redis.wavesnake.local:${TRAEFIK_INTERNAL_IP}"
+      - "db.wavesnake.local:${TRAEFIK_INTERNAL_IP}"
 
     deploy:
       restart_policy:
@@ -41,7 +41,7 @@ services:
 
         # This section is for internal http access
         - "traefik.http.routers.api-internal.entrypoints=web"
-        - "traefik.http.routers.api-internal.rule=Host(`api.wavesnake.local`,`192.168.1.230`)"
+        - 'traefik.http.routers.api-internal.rule=Host("api.${LOCAL_DOMAIN}, api.${EXTERNAL_DOMAIN}")'
         - "traefik.http.routers.api-internal.service=apisvc-internal"
         - "traefik.http.services.apisvc-internal.loadbalancer.server.port=5000"
 
@@ -56,7 +56,7 @@ services:
 
         # This section is for external https access
         - "traefik.http.routers.api-secure.entrypoints=secure"
-        - "traefik.http.routers.api-secure.rule=Host(`api.wavesnake.dk`)"
+        - 'traefik.http.routers.api-secure.rule=Host("api.${EXTERNAL_DOMAIN}")'
         - "traefik.http.routers.api-secure.tls=true"
         - "traefik.http.routers.api-secure.tls.certresolver=http"
         - "traefik.http.routers.api-secure.service=apisvc-secure"
