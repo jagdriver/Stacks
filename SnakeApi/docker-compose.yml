@@ -41,14 +41,14 @@ services:
 
         # This section is for internal http access
         - "traefik.http.routers.api-internal.entrypoints=web"
-        - 'traefik.http.routers.api-internal.rule=Host("api.${LOCAL_DOMAIN}, api.${EXTERNAL_DOMAIN}")'
+        - 'traefik.http.routers.api-internal.rule=Host("api.${LOCAL_DOMAIN}")'
         - "traefik.http.routers.api-internal.service=apisvc-internal"
         - "traefik.http.services.apisvc-internal.loadbalancer.server.port=5000"
 
 
         # This section is for external http access
         - "traefik.http.routers.api-external.entrypoints=web"
-        - "traefik.http.routers.api-external.rule=Host(`api.wavesnake.dk`)"
+        - 'traefik.http.routers.api-external.rule=Host("api.${EXTERNAL_DOMAIN}")'
         - "traefik.http.routers.api-external.service=apisvc-external"
         - "traefik.http.services.apisvc-external.loadbalancer.server.port=5000"
         - "traefik.http.middlewares.api-https-redirect.redirectscheme.scheme=https"
