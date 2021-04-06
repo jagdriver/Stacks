@@ -9,9 +9,9 @@ services:
   SnakeApi:
     image: jagdriver/wavesnake:snakeapi
     
-    environment:
-       ROOT_PASSWORD: "${ROOT_PASSWORD}"
-       MANAGER_PASSWORD: "${MANAGER_PASSWORD}"
+    #environment:
+    #   ROOT_PASSWORD: "${ROOT_PASSWORD}"
+    #   MANAGER_PASSWORD: "${MANAGER_PASSWORD}"
 
     networks:
       - traefik-public
