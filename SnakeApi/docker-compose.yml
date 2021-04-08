@@ -7,7 +7,7 @@ version: '3.7'
 
 services:
   SnakeApi:
-    image: jagdriver/snakeapps:snakeapi
+    image: jagdriver/wavesnake:snakeapi
     
     #environment:
     #   ROOT_PASSWORD: "${ROOT_PASSWORD}"
@@ -24,9 +24,13 @@ services:
       - "/mnt/config:/opt/containers"
 
     extra_hosts:
-      - "redis.wavesnake.local:172.16.1.1"
-      - "api.wavesnake.local:192.168.1.235"
-      - "sql.wavesnake.local:192.168.1.235"
+      - "redis.wavesnake.local:${SN01_ETH0_IP}"
+      - "mqt.wavesnake.local:${SN01_ETH0_IP}"
+      - "api.wavesnake.local:${SN01_WLAN0_IP}"
+      - "sql.wavesnake.local:${SN01_WLAN0_IP}"
+      - "console.wavesnake.local:${SN01_WLAN0_IP}"
+      - "config.wavesnake.local:${SN01_WLAN0_IP}"
+      - "sketch.wavesnake.local:${SN01_WLAN0_IP}"
 
     deploy:
       restart_policy:
