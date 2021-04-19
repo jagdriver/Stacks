@@ -6,12 +6,11 @@ version: '3.7'
 #
 services:
   apache:
-    image: jagdriver/wavesnake:apache
+    image: jagdriver/snakeapps:apache
     
     volumes:
-      - /opt/containers/apache/data:/var/www/html
-      - /mnt/config:/opt/config
-      
+      - /mnt/config/apache/data:/usr/local/apache2/htdocs
+
     networks:
       - traefik-public
 
