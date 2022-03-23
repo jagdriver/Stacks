@@ -21,10 +21,8 @@ services:
         - SwarmSecret
 
     volumes:
-      - "/var/log/snakelogs:/var/log/snakelogs"
-
-    environment:
-       MANAGER_PASSWORD: "${MANAGER_PASSWORD}"
+      - "/var/log/snakelogs/snakehistory:/var/log/snakelogs"
+      - "/mnt/config:/opt/containers"
 
     extra_hosts:
       - "redis.wavesnake.local:SN01-ETH0-IP"
@@ -43,7 +41,7 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.labels.wsnode == sn02
+          - node.labels.wsnode == sn01
 secrets:
   SwarmSecret:
     external: true

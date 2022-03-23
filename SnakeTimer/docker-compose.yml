@@ -26,7 +26,8 @@ services:
       - SwarmSecret
 
     volumes:
-      - "/var/log/snakelogs:/var/log/snakelogs"
+      - "/var/log/snakelogs/snaketimer:/var/log/snakelogs"
+      - "/mnt/config:/opt/containers"
 
     extra_hosts:
       - "redis.wavesnake.local:192.168.230.1"
@@ -39,7 +40,7 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.labels.wsnode == sn03
+          - node.labels.wsnode == sn01
 
 secrets:
   SwarmSecret:

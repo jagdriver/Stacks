@@ -9,16 +9,17 @@ services:
     image: jagdriver/wavesnake:snakeconsole
 
     extra_hosts:
-      - "redis.wavesnake.local:SN01-ETH0-IP"
-      - "mqt.wavesnake.local:SN01-ETH0-IP"
-      - "api.wavesnake.local:SN01-WLAN0-IP"
-      - "sql.wavesnake.local:SN01-WLAN0-IP"
-      - "console.wavesnake.local:SN01-WLAN0-IP"
-      - "config.wavesnake.local:SN01-WLAN0-IP"
-      - "sketch.wavesnake.local:SN01-WLAN0-IP"
+      - "redis.wavesnake.local:192.168.1.240"
+      - "mqt.wavesnake.local:192.168.1.240"
+      - "api.wavesnake.local:192.168.1.240"
+      - "sql.wavesnake.local:192.168.1.240"
+      - "console.wavesnake.local:192.168.1.240"
+      - "config.wavesnake.local:192.168.1.240"
+      - "sketch.wavesnake.local:192.168.1.240"
 
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/var/log/snakelogs/snakeconsole:/var/log/snakelogs"
       - "/mnt/config:/opt/containers"
 
     networks:
