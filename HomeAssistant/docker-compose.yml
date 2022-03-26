@@ -6,9 +6,16 @@ services:
     volumes:
       - /mnt/config/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
-    restart: unless-stopped
+    
+    ports:
+      - target: 8123
+        protocol: tcp
+        mode: host
+
+    networks:
+      - traefik-public
+
     privileged: true
-    network_mode: host
 
     deploy:
       restart_policy:
@@ -27,3 +34,6 @@ services:
         - "traefik.tcp.routers.asisstantint.rule=HostSNI(`*`)"
         - "traefik.tcp.routers.assistantint.service=homeassistantinternal"
         - "traefik.tcp.services.homeassistantinternal.loadBalancer.server.port=8123"
+networks:
+   traefik-public:
+     external: true
