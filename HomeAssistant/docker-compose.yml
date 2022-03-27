@@ -19,7 +19,7 @@ services:
 
     deploy:
       restart_policy:
-        condition: any
+        condition: on-failure
         delay: 5s
         max_attempts: 3
         window: 120s
@@ -31,10 +31,10 @@ services:
         - "traefik.enable=true"
 
         # This section id for local http access
-        - "traefik.tcp.routers.assistantint.entrypoints=homeassistant"
-        - "traefik.tcp.routers.asisstantint.rule=HostSNI(`*`)"
-        - "traefik.tcp.routers.assistantint.service=homeassistantinternal"
-        - "traefik.tcp.services.homeassistantinternal.loadBalancer.server.port=8123"
+        - "traefik.tcp.routers.ass.entrypoints=homeassistant"
+        - "traefik.tcp.routers.ass.rule=HostSNI(`*`)"
+        - "traefik.tcp.routers.ass.service=homeass"
+        - "traefik.tcp.services.homeass.loadBalancer.server.port=8123"
 
 networks:
    traefik-public:
