@@ -30,12 +30,17 @@ services:
       labels:
         - "traefik.enable=true"
 
-        # This section id for local http access
+        # This section is for HomeAssistant http access
         - "traefik.tcp.routers.ass.entrypoints=homeass"
         - "traefik.tcp.routers.ass.rule=HostSNI(`*`)"
         - "traefik.tcp.routers.ass.service=homeass"
         - "traefik.tcp.services.homeass.loadBalancer.server.port=8123"
-
+        
+        # Here we add ESPHome on port 8124
+        - "traefik.tcp.routers.esphome.entrypoints=esphome"
+        - "traefik.tcp.routers.esphome.rule=HostSNI(`*`)"
+        - "traefik.tcp.routers.esphome.service=esphome"
+        - "traefik.tcp.services.esphome.loadBalancer.server.port=8124"
 networks:
    traefik-public:
      external: true
