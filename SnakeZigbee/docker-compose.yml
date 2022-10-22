@@ -13,14 +13,14 @@ services:
     networks:
       - traefik-public
 
-    extra_hosts:
-      - "redis.wavesnake.local:SN01-ETH0-IP"
-      - "mqt.wavesnake.local:SN01-ETH0-IP"
-      - "api.wavesnake.local:SN01-WLAN0-IP"
-      - "sql.wavesnake.local:SN01-WLAN0-IP"
-      - "console.wavesnake.local:SN01-WLAN0-IP"
-      - "config.wavesnake.local:SN01-WLAN0-IP"
-      - "sketch.wavesnake.local:SN01-WLAN0-IP"
+    # extra_hosts:
+    #   - "redis.wavesnake.local:SN01-ETH0-IP"
+    #   - "mqt.wavesnake.local:SN01-ETH0-IP"
+    #   - "api.wavesnake.local:SN01-WLAN0-IP"
+    #   - "sql.wavesnake.local:SN01-WLAN0-IP"
+    #   - "console.wavesnake.local:SN01-WLAN0-IP"
+    #   - "config.wavesnake.local:SN01-WLAN0-IP"
+    #   - "sketch.wavesnake.local:SN01-WLAN0-IP"
       
     volumes:
       - "/mnt/config/snakezig/data:/app/data"
