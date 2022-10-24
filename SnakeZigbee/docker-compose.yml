@@ -35,6 +35,15 @@ services:
       placement:
         constraints:
           - node.labels.wsnode == sn01
+      labels:
+        - "traefik.enable=true"
+
+        # This section is for zigbee.wavesnake.local http access
+        - "traefik.http.routers.zigbee-local.entrypoints=zig"
+        - "traefik.http.routers.zigbee-local.rule=Host(`zigbee.wavesnake.local`)"
+        - "traefik.http.routers.zigbee-local.service=zigbee-local"
+        - "traefik.http.services.zigbee-local.loadbalancer.server.port=8125"
+
 
 networks:
   traefik-public:
