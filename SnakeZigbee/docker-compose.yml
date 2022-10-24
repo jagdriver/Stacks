@@ -8,23 +8,14 @@ version: '3.7'
 services:
 
   zigbee2mqtt: 
-    image: jagdriver/wavesnake:snakezig
-
+    #image: jagdriver/wavesnake:snakezig
+    image: koenkk/zigbee2mqtt:latest-dev
     networks:
       - traefik-public
     ports:
       - target: 8125
         protocol: tcp
-        mode: host
-
-    # extra_hosts:
-    #   - "redis.wavesnake.local:SN01-ETH0-IP"
-    #   - "mqt.wavesnake.local:SN01-ETH0-IP"
-    #   - "api.wavesnake.local:SN01-WLAN0-IP"
-    #   - "sql.wavesnake.local:SN01-WLAN0-IP"
-    #   - "console.wavesnake.local:SN01-WLAN0-IP"
-    #   - "config.wavesnake.local:SN01-WLAN0-IP"
-    #   - "sketch.wavesnake.local:SN01-WLAN0-IP"
+        mode: host"
       
     volumes:
       - "/mnt/config/snakezig/data:/app/data"
