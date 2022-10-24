@@ -11,12 +11,7 @@ services:
     #image: jagdriver/wavesnake:snakezig
     image: koenkk/zigbee2mqtt:latest-dev
     networks:
-      - traefik-public
-    ports:
-      - target: 8125
-        protocol: tcp
-        mode: host"
-      
+      - traefik-public      
     volumes:
       - "/mnt/config/snakezig/data:/app/data"
       - "/dev/cc2531:/dev/cc2531"
@@ -35,7 +30,7 @@ services:
 
         # This section is for zigbee.wavesnake.local http access
         - "traefik.http.routers.zigbee-local.entrypoints=web"
-        - "traefik.http.routers.zigbee-local.rule=HostSNI(`*`)"
+        - "traefik.http.routers.zigbee-local.rule=HostSNI(`zigbee.wavesnake.local`)"
         - "traefik.http.routers.zigbee-local.service=zigbee-local"
         - "traefik.http.services.zigbee-local.loadbalancer.server.port=8125"
 
