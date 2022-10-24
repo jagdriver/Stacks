@@ -9,11 +9,12 @@ services:
 
   zigbee2mqtt: 
     image: jagdriver/wavesnake:snakezig
-    #image: koenkk/zigbee2mqtt:latest-dev
+    #image: koenkk/zigbee2mqtt:latest-dev ( did not work )
     networks:
       - traefik-public      
     volumes:
       - "/mnt/config/snakezig/data:/app/data"
+      - "/var/log/snakelogs/zigbee2mqtt:/var/log"
       - "/dev/cc2531:/dev/cc2531"
 
     deploy:
@@ -29,6 +30,7 @@ services:
         - "traefik.enable=true"
 
         # This section is for zigbee.wavesnake.local http access
+        # Tested and working
         - "traefik.http.routers.zigbee-local.entrypoints=web"
         - "traefik.http.routers.zigbee-local.rule=Host(`zigbee.wavesnake.local`)"
         - "traefik.http.routers.zigbee-local.service=zigbee-local"
