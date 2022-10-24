@@ -8,8 +8,8 @@ version: '3.7'
 services:
 
   zigbee2mqtt: 
-    #image: jagdriver/wavesnake:snakezig
-    image: koenkk/zigbee2mqtt:latest-dev
+    image: jagdriver/wavesnake:snakezig
+    #image: koenkk/zigbee2mqtt:latest-dev
     networks:
       - traefik-public      
     volumes:
