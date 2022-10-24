@@ -34,10 +34,10 @@ services:
         - "traefik.enable=true"
 
         # This section is for zigbee.wavesnake.local http access
-        - "traefik.tcp.routers.zigbee-local.entrypoints=zigbee"
-        - "traefik.tcp.routers.zigbee-local.rule=HostSNI(`*`)"
-        - "traefik.tcp.routers.zigbee-local.service=zigbee-local"
-        - "traefik.tcp.services.zigbee-local.loadbalancer.server.port=8125"
+        - "traefik.http.routers.zigbee-local.entrypoints=zigbee"
+        - "traefik.http.routers.zigbee-local.rule=HostSNI(`*`)"
+        - "traefik.http.routers.zigbee-local.service=zigbee-local"
+        - "traefik.http.services.zigbee-local.loadbalancer.server.port=8125"
 
 
 networks:
