@@ -10,8 +10,9 @@ services:
     image: jagdriver/snakeapps:snakeapi
 
     depends_on:
-      - db
+      - mysql
       - redis
+      
     networks:
       - traefik-public
 
