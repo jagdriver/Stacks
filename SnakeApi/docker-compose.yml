@@ -9,6 +9,9 @@ services:
   SnakeApi:
     image: jagdriver/snakeapps:snakeapi
 
+    depends_on:
+      - db
+      - redis
     networks:
       - traefik-public
 
