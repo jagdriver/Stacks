@@ -6,12 +6,12 @@ version: '3.7'
 #
 services:
   SnakeConsole:
-    image: jagdriver/wavesnake:snakeconsole
+    image: jagdriver/snakeapps:snakeconsole
 
     depends_on:
       - mysql
       - redis
-      
+
     extra_hosts:
       - "redis.wavesnake.local:192.168.1.240"
       - "mqt.wavesnake.local:192.168.1.240"
@@ -47,7 +47,7 @@ services:
 
         # This section is for console.wavesnake.local http access
         - "traefik.http.routers.console-local.entrypoints=web"
-        - "traefik.http.routers.console-local.rule=Host(`console.wavesnake.local`)"
+        - "traefik.http.routers.console-local.rule=Host(`console.wavesnake.local`,`192.168.1.240`)"
         - "traefik.http.routers.console-local.service=console-local"
         - "traefik.http.services.console-local.loadbalancer.server.port=80"
 

@@ -12,8 +12,12 @@ version: '3.7'
 services:
 
   snakehistory1: 
-    image: jagdriver/wavesnake:snakehistory
-
+    image: jagdriver/snakeapps:snakehistory
+    
+    depends_on:
+      - mysql
+      - redis
+      
     networks:
       - traefik-public
       
