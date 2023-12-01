@@ -7,9 +7,9 @@ services:
       - /mnt/config/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
     
-    ports:
-      - target: 8123
-        protocol: tcp
+    #ports:
+      #- target: 8123
+        #protocol: tcp
         # mode: host
 
     networks:
