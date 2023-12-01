@@ -41,7 +41,7 @@ services:
         - "traefik.http.routers.has-server-secure.rule=Host(`has.wavesnake.dk`)"
         - "traefik.http.routers.has-server-secure.tls=true"
         - "traefik.http.routers.has-server-secure.tls.certresolver=http"
-        - "traefik.http.routers.has-server-secure.service=console-server-secure"
+        - "traefik.http.routers.has-server-secure.service=has-server-secure"
         - "traefik.http.services.has-server-secure.loadbalancer.server.port=8123"
 
 networks:
