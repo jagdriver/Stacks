@@ -36,6 +36,14 @@ services:
         - "traefik.tcp.routers.ass.service=homeass"
         - "traefik.tcp.services.homeass.loadBalancer.server.port=8123"
 
+        # This section is for has.wavesnake.dk external https access
+        - "traefik.http.routers.has-server-secure.entrypoints=secure"
+        - "traefik.http.routers.has-server-secure.rule=Host(`has.wavesnake.dk`)"
+        - "traefik.http.routers.has-server-secure.tls=true"
+        - "traefik.http.routers.has-server-secure.tls.certresolver=http"
+        - "traefik.http.routers.has-server-secure.service=console-server-secure"
+        - "traefik.http.services.has-server-secure.loadbalancer.server.port=8123"
+
 networks:
    traefik-public:
      external: true
