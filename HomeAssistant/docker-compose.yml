@@ -10,7 +10,7 @@ services:
     ports:
       - target: 8123
         protocol: tcp
-        mode: host
+        # mode: host
 
     networks:
       - traefik-public
