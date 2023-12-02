@@ -42,7 +42,7 @@ services:
         - "traefik.http.routers.has-external.service=has-external"
         - "traefik.http.services.has-external.loadbalancer.server.port=8123"
         - "traefik.http.middlewares.has-https-redirect.redirectscheme.scheme=https"
-        - "traefik.http.routers.has-external.middlewares=config-https-redirect"
+        - "traefik.http.routers.has-external.middlewares=has-https-redirect"
 
         # This section is for has.wavesnake.dk external https access
         - "traefik.http.routers.has-server-secure.entrypoints=secure"
