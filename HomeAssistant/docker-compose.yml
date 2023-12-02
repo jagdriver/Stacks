@@ -9,7 +9,7 @@ services:
     
     ports:
       - target: 8123
-        #protocol: tcp
+        protocol: tcp
         #mode: host 
 
     networks:
