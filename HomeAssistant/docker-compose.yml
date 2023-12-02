@@ -30,7 +30,7 @@ services:
       labels:
         - "traefik.enable=true"
 
-        # This section is for HomeAssistant http access
+        # This section is for HomeAssistant local http access
         - "traefik.tcp.routers.ass.entrypoints=homeass"
         - "traefik.tcp.routers.ass.rule=HostSNI(`*`)"
         - "traefik.tcp.routers.ass.service=homeass"
