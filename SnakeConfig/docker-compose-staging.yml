@@ -6,7 +6,7 @@ version: '3.7'
 # 
 
 services:
-  SnakeApi:
+  SnakeConfig:
     image: jagdriver/snakeapps:snakeconfig-staging
 
     ports:
