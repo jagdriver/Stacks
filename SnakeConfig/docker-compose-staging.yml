@@ -19,7 +19,7 @@ services:
       - SwarmSecret
 
     volumes:
-      - "/var/snakelogs/snakeapi:/var/log/snakelogs"
+      - "/var/snakelogs/snakeconfig:/var/log/snakelogs"
       - "/var/containers/configuration:/opt/containers/configuration"
 
 secrets:
