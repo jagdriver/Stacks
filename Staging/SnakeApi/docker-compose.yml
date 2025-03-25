@@ -8,9 +8,14 @@ version: '3.7'
 services:
   SnakeApi:
     image: jagdriver/snakeapps:snakeapi-staging
-
+    #network_mode: "host" 
+    
     ports:
       - "2000:2000"
+      - mode: host
+    
+    #ports:
+      #- "2000:2000"
       
     networks:
       - traefik-public
